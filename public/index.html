@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sticker Dream</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1>Sticker Dream</h1>
+        <p>Turn your favorite photos into high-impact stickers in seconds.</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card upload-card">
+        <h2>Upload your image</h2>
+        <p class="helper-text">
+          Choose a clear photo of the subject you want to transform into a sticker.
+        </p>
+        <label class="upload">
+          <input type="file" accept="image/*" id="image-input" />
+          <span class="upload__cta">Select image</span>
+          <span class="upload__hint">PNG or JPG up to 5 MB</span>
+        </label>
+        <div class="preview" id="original-preview"></div>
+      </section>
+
+      <section class="card options-card">
+        <h2>Choose a style</h2>
+        <p class="helper-text">
+          Sticker Dream blends OpenAI's gpt-image-1 with curated prompts to match your vibe.
+        </p>
+        <div class="style-options" id="style-options">
+          <button class="style-option active" data-style="anime">Anime</button>
+          <button class="style-option" data-style="cartoon">Cartoon</button>
+          <button class="style-option" data-style="line-art">Line art</button>
+        </div>
+        <button class="primary" id="generate-button" disabled>Generate sticker</button>
+        <p class="status" id="status"></p>
+        <div class="preview" id="sticker-preview"></div>
+        <button class="secondary" id="show-product-button" hidden>Show on product</button>
+      </section>
+
+      <section class="card products-card" id="products-card" hidden>
+        <h2>Pick your product</h2>
+        <p class="helper-text">
+          See how your freshly generated sticker shines on real merch.
+        </p>
+        <div class="product-grid">
+          <article class="product" data-product="sticker">
+            <div class="product__mock">
+              <img alt="Sticker mockup" class="mock-base" src="assets/sticker-base.svg" />
+              <img alt="Sticker design" class="mock-design" id="mock-sticker" />
+            </div>
+            <h3>Sticker</h3>
+          </article>
+          <article class="product" data-product="mug">
+            <div class="product__mock">
+              <img alt="Mug mockup" class="mock-base" src="assets/mug-base.svg" />
+              <img alt="Sticker design" class="mock-design" id="mock-mug" />
+            </div>
+            <h3>Mug</h3>
+          </article>
+          <article class="product" data-product="poster">
+            <div class="product__mock">
+              <img alt="Poster mockup" class="mock-base" src="assets/poster-base.svg" />
+              <img alt="Sticker design" class="mock-design" id="mock-poster" />
+            </div>
+            <h3>Poster</h3>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Crafted with <span>✨</span> by Sticker Dream.
+    </footer>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
