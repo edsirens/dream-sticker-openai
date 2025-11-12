@@ -43,6 +43,18 @@ app.post('/api/stickers', async (req, res) => {
       });
     }
 
+    const dataUrlMatch = /^data:(image\/(png|jpeg|webp));base64,(.+)$/.exec(image);
+
+    if (!dataUrlMatch) {
+      return res.status(400).json({
+        error:
+          "Unsupported image format. Please upload a PNG, JPEG, or WEBP image that doesn't exceed 5 MB."
+      });
+    }
+
+    const [, mimeType, extension, base64Payload] = dataUrlMatch;
+    const imageBuffer = Buffer.from(base64Payload, 'base64');
+    const imageBlob = new Blob([imageBuffer], { type: mimeType });
     const base64Data = image.includes(',') ? image.split(',')[1] : image;
     const imageBuffer = Buffer.from(base64Data, 'base64');
 
@@ -52,6 +64,7 @@ app.post('/api/stickers', async (req, res) => {
       model: 'gpt-image-1',
       prompt,
       size: '1024x1024',
+      image: await toFile(imageBlob, `upload.${extension}`)
       image: await toFile(imageBuffer, 'upload.png')
     });
 
