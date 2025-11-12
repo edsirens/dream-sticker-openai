@@ -55,6 +55,8 @@ app.post('/api/stickers', async (req, res) => {
     const [, mimeType, extension, base64Payload] = dataUrlMatch;
     const imageBuffer = Buffer.from(base64Payload, 'base64');
     const imageBlob = new Blob([imageBuffer], { type: mimeType });
+    const base64Data = image.includes(',') ? image.split(',')[1] : image;
+    const imageBuffer = Buffer.from(base64Data, 'base64');
 
     const prompt = `Transform the subject from the uploaded photo into a ${styleDescription}. Remove the background, add a white contour stroke and prepare it as a sticker-ready design.`;
 
@@ -63,6 +65,7 @@ app.post('/api/stickers', async (req, res) => {
       prompt,
       size: '1024x1024',
       image: await toFile(imageBlob, `upload.${extension}`)
+      image: await toFile(imageBuffer, 'upload.png')
     });
 
     const stickerImage = stickerResponse?.data?.[0]?.b64_json;
